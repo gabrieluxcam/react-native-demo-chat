@@ -34,7 +34,10 @@ const ConversationItem = ({item, onPress, isOnline}) => {
               </Text>
               <Icon
                 style={{flex: 2, textAlign: 'right'}}
-                name={item.isRead ? 'check-all' : 'check'}
+                name={
+                  // item.isRead ? 'check-all' : 'check'
+                  'check-all'
+                }
                 size={15}
                 color={MyColors.primaryColor}
               />

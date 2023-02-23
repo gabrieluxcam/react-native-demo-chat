@@ -9,6 +9,7 @@ import {getRandomInt} from '../../helpers';
 function Contacts({navigation}) {
   const [searchText, setSearchText] = useState('');
   const [contactList, setContactList] = useState([]);
+  const [userList, setUserList] = useState([]);
 
   const onlineIDs = [1, 4, 6, 8, 9, 15]; //currently online user ids
   const images = [
@@ -19,20 +20,22 @@ function Contacts({navigation}) {
   ];
 
   useEffect(() => {
-    //load contact json from external file
-    this.userList = require('../../assets/contacts.json');
-    setContactList(require('../../assets/contacts.json'));
+    try {
+      //load contact json from external file
+      let userList = require('../../assets/contacts.json');
+      setUserList(userList);
+      setContactList(userList);
+    } catch (error) {
+      console.error(error);
+    }
   }, []); //Only runs once at component mount
 
   function _search(query) {
     setSearchText(query);
     //filter list for search query
-    const filter = this.userList.filter(obj => {
-      // TODO check this
-      if (obj.name.toLowerCase().includes(query.toLowerCase())) {
-        return obj;
-      }
-    });
+    const filter = userList.filter(obj =>
+      obj.name.toLowerCase().includes(query.toLowerCase()) ? obj : null,
+    );
     setContactList(filter);
   }
 

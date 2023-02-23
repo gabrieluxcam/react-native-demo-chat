@@ -40,6 +40,7 @@ function Home({navigation}) {
         isRead: getRandomBool(),
       });
     }
+
     setConversations(tempConv);
   }, []); //Only runs once at component mount
 
