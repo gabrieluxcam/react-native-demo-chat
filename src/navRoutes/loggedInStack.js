@@ -23,7 +23,7 @@ export function LoggedInStack() {
       <Stack.Screen
         options={({route}) => ({
           headerBackTitleVisible: false,
-          title: route.params.name,
+          headerTitle: route.params.name,
         })}
         name="ChatDetail"
         initialParams={{id: '0', name: '', image: ''}}
@@ -38,7 +38,7 @@ export function LoggedInStack() {
             shadowOpacity: 0,
           },
           headerBackTitleVisible: false,
-          title: 'Edit profile',
+          headerTitle: 'Edit Profile',
         }}
         name="EditProfile"
         component={EditProfile}
@@ -47,7 +47,7 @@ export function LoggedInStack() {
       <Stack.Screen
         options={{
           headerBackTitleVisible: false,
-          title: 'Privacy policy',
+          headerTitle: 'Privacy Policy',
         }}
         name="PrivacyPolicy"
         component={PrivacyPolicy}
@@ -56,7 +56,7 @@ export function LoggedInStack() {
       <Stack.Screen
         options={{
           headerBackTitleVisible: false,
-          title: 'Private conversations',
+          headerTitle: 'Private Conversations',
         }}
         name="PrivateMessage"
         component={PrivateMessage}
@@ -64,7 +64,7 @@ export function LoggedInStack() {
       <Stack.Screen
         options={{
           headerBackTitleVisible: false,
-          title: 'Crasher',
+          headerTitle: 'Crasher',
         }}
         name="Crasher"
         component={Crasher}

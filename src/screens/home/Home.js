@@ -57,7 +57,7 @@ function Home({navigation}) {
       <FlatList
         data={conversations}
         renderItem={({item}) => {
-          console.logI = 'should render';
+          console.log('should render');
           return (
             <ConversationItem
               onPress={() => _goToDetail(item)}

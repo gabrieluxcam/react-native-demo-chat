@@ -6,54 +6,45 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
 import {hideSensitiveView} from '../helpers/uxcamHelper';
 
-const ConversationItem = ({item, onPress, isOnline}) => {
+const ConversationItem = ({item, onPress, isOnline = false}) => {
   return (
-    <View style={{flex: 1}}>
-      <TouchableWithoutFeedback onPress={onPress} style={styles.container}>
-        <View style={styles.container}>
-          <View>
-            <Image style={styles.image} source={{uri: item.image}} />
-            {isOnline && <View style={styles.online} />}
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.container}>
+        <View>
+          <Image style={styles.image} source={{uri: item.image}} />
+          {isOnline && <View style={styles.online} />}
+        </View>
+        <View style={{flex: 1, marginLeft: 10}}>
+          <View style={[styles.textRow, {marginTop: 8}]}>
+            <Text numberOfLines={1} style={styles.name}>
+              {item.name}
+            </Text>
+            <Text style={styles.time}>{item.time}</Text>
           </View>
-          <View style={{flex: 1, marginLeft: 10}}>
-            <View style={[styles.textRow, {marginTop: 8}]}>
-              <Text numberOfLines={1} style={styles.name}>
-                {item.name}
-              </Text>
-              <Text style={styles.time}>{item.time}</Text>
-            </View>
-            <View style={styles.textRow}>
-              <Text
-                // ref={hideSensitiveView}
-                numberOfLines={1}
-                style={[
-                  styles.message,
-                  item.isRead ? {} : {fontWeight: 'bold'},
-                ]}>
-                {item.text}
-              </Text>
-              <Icon
-                style={{flex: 2, textAlign: 'right'}}
-                name={
-                  // item.isRead ? 'check-all' : 'check'
-                  'check-all'
-                }
-                size={15}
-                color={MyColors.primaryColor}
-              />
-            </View>
+          <View style={styles.textRow}>
+            <Text
+              // ref={hideSensitiveView}
+              numberOfLines={1}
+              style={[styles.message, item.isRead ? {} : {fontWeight: 'bold'}]}>
+              {item.text}
+            </Text>
+            <Icon
+              style={{flex: 2, textAlign: 'right'}}
+              name={'check-all'}
+              size={15}
+              color={MyColors.primaryColor}
+            />
           </View>
         </View>
-      </TouchableWithoutFeedback>
-    </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
-// Props that can be used with this component. Not required but brings more clarity.
 ConversationItem.propTypes = {
   item: PropTypes.object,
   onPress: PropTypes.func.isRequired,
-  isOnline: PropTypes.bool.isRequired,
+  isOnline: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({

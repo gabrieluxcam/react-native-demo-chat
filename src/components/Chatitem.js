@@ -5,6 +5,9 @@ import {MyColors, FontSize} from '../config/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
 
+const CHAT_ITEM_IMAGE_SIZE = 40;
+const width = Dimensions.get('window').width;
+
 const ChatItem = ({item, myID, image, isLast}) => {
   const isMy = myID === item.userID;
 
@@ -22,13 +25,10 @@ const ChatItem = ({item, myID, image, isLast}) => {
         <Text style={styles.timeText}>{item.time}</Text>
         {isLast && (
           <Icon
-            name={
-              // item.sent === true && item.isRead === true ? 'check-all' : 'check'
-              'check'
-            }
+            name={item.sent && item.isRead ? 'check-all' : 'check'}
             size={15}
             style={{marginBottom: 10}}
-            color={item.sent === true ? MyColors.primaryColor : 'gray'}
+            color={item.sent ? MyColors.primaryColor : 'gray'}
           />
         )}
       </View>
@@ -43,8 +43,6 @@ ChatItem.propTypes = {
   isLast: PropTypes.bool.isRequired,
 };
 
-const width = Dimensions.get('window').width;
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -53,8 +51,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
   },
   image: {
-    height: 40,
-    width: 40,
+    height: CHAT_ITEM_IMAGE_SIZE,
+    width: CHAT_ITEM_IMAGE_SIZE,
     borderRadius: 10,
     backgroundColor: MyColors.lightGray,
   },
@@ -77,7 +75,7 @@ const styles = StyleSheet.create({
     borderColor: '#DCDCDC',
     marginLeft: 10,
     maxWidth: width - 100,
-    borderBottomStartRadius: 0,
+    borderBottomLeftRadius: 0,
   },
   myMessageWrapper: {
     backgroundColor: MyColors.primaryColor,

@@ -74,18 +74,17 @@ export function HomeTab() {
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, size}) => {
           let iconName;
-          let color;
 
           if (route.name === 'Conversations') {
             iconName = 'ios-chatboxes';
-            color = focused ? 'black' : MyColors.lightGray;
           } else if (route.name === 'Contacts') {
             iconName = 'md-contacts';
-            color = focused ? 'black' : MyColors.lightGray;
           } else if (route.name === 'Profile') {
             iconName = 'ios-list-box';
-            color = focused ? 'black' : MyColors.lightGray;
           }
+
+          const color = focused ? 'black' : MyColors.lightGray;
+
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}>
