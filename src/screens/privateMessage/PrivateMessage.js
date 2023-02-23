@@ -1,23 +1,23 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native';
 import styles from './styles';
 import {Text} from 'react-native-paper';
 import {occludeSensitiveScreen, logEvent} from '../../helpers/uxcamHelper';
 
 export default function PrivateMessage() {
-  let timeSpent = 0;
+  const [timeSpent, setTimeSpent] = useState(0);
 
   useEffect(() => {
     occludeSensitiveScreen(true);
-    this.interV = setInterval(() => {
-      timeSpent += 1;
+    const timerId = setTimeout(() => {
+      setTimeSpent(prevTime => prevTime + 1);
     }, 1000);
     return () => {
       logEvent('exit private conversation', {
-        timeSpent: timeSpent + ' seconds',
+        timeSpent: `${timeSpent} seconds`,
       });
       occludeSensitiveScreen(false);
-      clearInterval(this.interV);
+      clearTimeout(timerId);
     };
   }, []);
 

@@ -1,39 +1,13 @@
 import React from 'react';
-import {View, Image, FlatList, TouchableOpacity} from 'react-native';
+import {View, Image, FlatList, TouchableWithoutFeedback} from 'react-native';
 import {AuthContext} from '../../helpers';
 import {commonStyles} from '../commonStyles';
 import {Text, Divider} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {getRandomInt} from '../../helpers';
+import {actions} from '../../helpers/actions';
 
 function Profile({navigation}) {
   const {signOut} = React.useContext(AuthContext);
-
-  const actions = React.useMemo(
-    () => [
-      {
-        icon: 'lock-outline',
-        name: 'Privacy policy',
-        routeName: 'PrivacyPolicy',
-      },
-      {
-        icon: 'shield-lock',
-        name: 'Private conversations',
-        routeName: 'PrivateMessage',
-      },
-      {
-        icon: 'skull-crossbones-outline',
-        name: 'Crash me if you can',
-        routeName: 'Crasher',
-      },
-      {
-        icon: 'logout',
-        name: 'Logout',
-        routeName: null,
-      },
-    ],
-    [],
-  );
 
   const _logout = React.useCallback(() => {
     signOut(); //logout, clear token and load logged out stack
@@ -48,12 +22,12 @@ function Profile({navigation}) {
 
   const renderActionItem = React.useCallback(
     ({item}) => (
-      <TouchableOpacity
-        onPress={() => _navigate(item.routeName)}
-        style={[commonStyles.infoContainer, {paddingVertical: 15}]}>
-        <Icon name={item.icon} color="gray" size={16} />
-        <Text style={commonStyles.listText}>{item.name}</Text>
-      </TouchableOpacity>
+      <TouchableWithoutFeedback onPress={() => _navigate(item.routeName)}>
+        <View style={[commonStyles.infoContainer, {paddingVertical: 15}]}>
+          <Icon name={item.icon} color="gray" size={16} />
+          <Text style={commonStyles.listText}>{item.name}</Text>
+        </View>
+      </TouchableWithoutFeedback>
     ),
     [_navigate],
   );
@@ -76,11 +50,11 @@ function Profile({navigation}) {
           return <Text style={commonStyles.headerText}>Options</Text>;
         }}
         renderItem={renderActionItem}
-        keyExtractor={() => String(getRandomInt(1000))}
+        keyExtractor={item => item.name}
         ItemSeparatorComponent={() => <Divider />}
       />
     </View>
   );
 }
 
-export default React.memo(Profile);
+export default Profile;
