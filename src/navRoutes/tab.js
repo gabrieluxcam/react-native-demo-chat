@@ -69,7 +69,7 @@ export function HomeTab() {
     <Tab.Navigator
       initialRouteName="Conversations"
       tabBarOptions={{
-        showLabel: false,
+        showLabel: true,
       }}
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, size}) => {

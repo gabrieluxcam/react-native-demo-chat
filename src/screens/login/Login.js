@@ -33,7 +33,7 @@ function Login({navigation}) {
   const installSource = ['Facebook Ads', 'Google Ads', 'Organic'];
   const ageCategory = ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'];
 
-  const _handleOnChange = (key, value) => {
+  const _handleOnChange = (key, value = '') => {
     setInputValues({...inputValues, [key]: value});
   };
 
@@ -66,7 +66,7 @@ function Login({navigation}) {
       },
     ];
     userProp = propArr[getRandomInt(5)];
-    key = Object.keys(userProp)[0];
+    const [{key, value}] = Object.entries(userProp);
     setUserPropertyValue(key, userProp[key]);
   }
 
@@ -82,17 +82,20 @@ function Login({navigation}) {
   }
 
   //Start UXCam session
-  function _startSession(key) {
-    setShowDialog(false);
-    startSession(key);
-  }
+  const handleStartSession = useCallback(
+    key => {
+      setShowDialog(false);
+      startSession(key);
+    },
+    [startSession],
+  ); // ?? Would this work?
 
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: MyColors.defaultBackground}}>
       <Spinner visible={showSpinner} />
       <StartDialog
-        onStart={key => _startSession(key)}
+        onStart={handleStartSession}
         onDismiss={() => setShowDialog(false)}
         visible={showDialog}
       />
