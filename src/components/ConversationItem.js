@@ -1,6 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, Image, TouchableWithoutFeedback} from 'react-native';
-import {Text} from 'react-native-paper';
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+  Text,
+} from 'react-native';
 import {MyColors} from '../config/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
@@ -23,7 +28,7 @@ const ConversationItem = ({item, onPress, isOnline = false}) => {
           </View>
           <View style={styles.textRow}>
             <Text
-              // ref={hideSensitiveView}
+              ref={hideSensitiveView}
               numberOfLines={1}
               style={[styles.message, item.isRead ? {} : {fontWeight: 'bold'}]}>
               {item.text}

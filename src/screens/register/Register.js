@@ -1,9 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {View, Keyboard, Linking, AppState} from 'react-native';
+import {
+  View,
+  Keyboard,
+  Linking,
+  AppState,
+  Text,
+  TextInput,
+  Button,
+} from 'react-native';
 import styles from './styles';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {MyColors} from '../../config/theme';
-import {Text, TextInput, Button, Caption} from 'react-native-paper';
+import {Caption} from 'react-native-paper';
 import {commonStyles} from '../commonStyles';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {showToast, getRandomBool, getRandomInt} from '../../helpers';
@@ -102,7 +110,7 @@ function Register({navigation}) {
             onChangeText={text => _handleOnChange('username', text)}
           />
           <TextInput
-            // ref={hideSensitiveView}
+            ref={hideSensitiveView}
             autoCapitalize="none"
             theme={{
               roundness: 20,
@@ -118,7 +126,7 @@ function Register({navigation}) {
             onChangeText={text => _handleOnChange('email', text)}
           />
           <TextInput
-            // ref={hideSensitiveView}
+            ref={hideSensitiveView}
             autoCapitalize="none"
             theme={{
               roundness: 20,

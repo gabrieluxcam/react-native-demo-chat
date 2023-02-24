@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
-import {View, Image, FlatList} from 'react-native';
+import {View, Image, FlatList, Text} from 'react-native';
 import styles from './styles';
-import {IconButton, Text, Divider, Button} from 'react-native-paper';
+import {IconButton, Divider, Button} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Feather';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {getRandomInt, showToast} from '../../helpers';
@@ -83,17 +83,13 @@ export default function ContactDetail({navigation, route}) {
       </View>
       <View style={[commonStyles.infoContainer, {marginTop: 40}]}>
         <Icon name="phone" size={20} color="gray" />
-        <Text
-          // ref={hideSensitiveView}
-          style={styles.infoText}>
+        <Text ref={hideSensitiveView} style={styles.infoText}>
           XXXXXXXXXXXXX
         </Text>
       </View>
       <View style={[commonStyles.infoContainer, {marginTop: 20}]}>
         <Icon name="mail" size={20} color="gray" />
-        <Text
-          // ref={hideSensitiveView}
-          style={styles.infoText}>
+        <Text ref={hideSensitiveView} style={styles.infoText}>
           user@userdomain.com
         </Text>
       </View>
